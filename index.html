@@ -1417,9 +1417,7 @@
           headers: { 'Accept': 'application/json' }
         });
 
-        const json = await res.json().catch(() => ({}));
-        console.log('Web3Forms response:', res.status, json);
-        if (res.ok) {
+        if ((await res.json().catch(() => ({}))).success) {
           // Show success state
           document.getElementById('waitlist-form-wrap').style.display = 'none';
           document.querySelector('.waitlist-role-row').style.display = 'none';
