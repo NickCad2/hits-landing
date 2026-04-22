@@ -15,11 +15,11 @@
     html { scroll-behavior: smooth; }
 
     :root {
-      --bg:      #141210;   /* page background */
-      --surface: #1C1A16;   /* elevated section bg */
-      --card:    #252218;   /* card background */
-      --fg:      #EDE9DF;   /* primary text */
-      --muted:   #7E7669;   /* muted text */
+      --bg:      #141210;
+      --surface: #1C1A16;
+      --card:    #252218;
+      --fg:      #EDE9DF;
+      --muted:   #7E7669;
       --border:  rgba(237, 233, 223, 0.09);
       --red:     #D0341D;
       --yellow:  #EFC930;
@@ -102,9 +102,8 @@
       gap: 48px; align-items: center;
       padding: 132px 52px 80px;
       border-bottom: 1px solid var(--border);
-      position: relative; overflow: hidden;
+      position: relative;
     }
-    /* subtle radial glow behind hero content */
     #hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -231,7 +230,7 @@
     }
     .hero-footnote span { color: var(--yellow); }
 
-    /* ── GENRE TICKER (inverted — light on dark) ── */
+    /* ── GENRE TICKER ── */
     .ticker-wrap {
       overflow: hidden;
       background: var(--fg);
@@ -372,7 +371,7 @@
     .stat-divider { width: 1px; height: 56px; background: rgba(20,18,16,0.18); margin: 0 32px; }
 
     /* ── FEATURE SPOTLIGHTS ── */
-    .spotlight { padding: 100px 52px; border-bottom: 1px solid var(--border); overflow: hidden; }
+    .spotlight { padding: 100px 52px; border-bottom: 1px solid var(--border); }
     .spotlight-inner {
       max-width: 1160px; margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
@@ -438,6 +437,85 @@
     }
     .sp-phone img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+    /* ── DUAL PHONE (Private Gigs) ── */
+    .dual-phone-wrap {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+    }
+    .dual-phone-wrap .sp-phone {
+      width: 158px;
+    }
+    .dual-phone-artist {
+      margin-top: 52px;
+    }
+    .dual-phone-arrow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-m);
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--red);
+      background: var(--bg);
+      border: 1px solid rgba(208,52,29,0.3);
+      padding: 6px 10px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* ── FOUNDER URGENCY BAR ── */
+    .founder-urgency {
+      max-width: 880px;
+      margin: 0 auto 44px;
+      background: rgba(208,52,29,0.07);
+      border: 1px solid rgba(208,52,29,0.28);
+      padding: 24px 32px;
+    }
+    .founder-urgency-inner { }
+    .founder-progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .founder-badge-pill {
+      font-family: var(--font-m);
+      font-size: 0.58rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--fg);
+      padding: 5px 16px;
+    }
+    .founder-spots-text {
+      font-family: var(--font-m);
+      font-size: 0.62rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .founder-bar {
+      height: 3px;
+      background: rgba(237,233,223,0.08);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .founder-bar-fill {
+      height: 100%;
+      background: var(--red);
+    }
+    .founder-note {
+      font-family: var(--font-m);
+      font-size: 0.6rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     /* ── PRICING ── */
     #pricing {
       padding: 100px 52px;
@@ -481,9 +559,18 @@
       letter-spacing: 2px; text-transform: uppercase;
       opacity: 0.5; margin-bottom: 14px;
     }
+    .ticket-price-row {
+      display: flex; align-items: baseline; gap: 14px;
+      margin-bottom: 2px;
+    }
     .ticket-price {
       font-family: var(--font-d); font-weight: 900;
-      font-size: 5.5rem; line-height: 1; margin-bottom: 2px;
+      font-size: 5.5rem; line-height: 1;
+    }
+    .ticket-price-was {
+      font-family: var(--font-m); font-size: 1.1rem;
+      text-decoration: line-through;
+      opacity: 0.35; letter-spacing: 0.5px;
     }
     .ticket-period {
       font-family: var(--font-m); font-size: 0.65rem;
@@ -781,6 +868,39 @@
     }
     .footer-social:hover { border-color: var(--red); color: var(--red); }
 
+    /* ── PHONE ZOOM ON HOVER ── */
+    .sp-phone,
+    .hero-phone,
+    .how-phone {
+      cursor: zoom-in;
+      will-change: transform;
+      transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+                  box-shadow 0.35s ease;
+    }
+    .sp-phone:hover,
+    .how-phone:hover {
+      transform: scale(1.5);
+      z-index: 900;
+      box-shadow: 0 0 0 1px #909090, 0 40px 140px rgba(0,0,0,0.95) !important;
+    }
+    /* hero phone has a base rotate(-2deg) — straighten it on zoom */
+    .hero-phone:hover {
+      transform: scale(1.5) rotate(0deg);
+      z-index: 900;
+      box-shadow: 0 0 0 1px #909090, 0 40px 140px rgba(0,0,0,0.95) !important;
+    }
+    /* The .reveal class sets transform: translateY(0) on parent wrappers, creating
+       isolated stacking contexts that trap z-index. Elevate the whole container
+       when a phone inside it is hovered so the zoom escapes sibling elements. */
+    .spotlight-vis:has(.sp-phone:hover) {
+      position: relative;
+      z-index: 200;
+    }
+    .how-card:has(.how-phone:hover) {
+      position: relative;
+      z-index: 200;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       #nav { padding: 18px 24px; }
@@ -805,8 +925,10 @@
       .spotlight-inner.flip .spotlight-copy { order: 1; }
       .spotlight-inner.flip .spotlight-vis  { order: 2; }
       .sp-phone { width: 165px; }
+      .dual-phone-wrap .sp-phone { width: 130px; }
       #pricing { padding: 72px 24px; }
       .ticket-row { grid-template-columns: 1fr; }
+      .founder-urgency { padding: 20px 20px; }
       #philly { padding: 72px 24px; }
       .philly-inner { grid-template-columns: 1fr; gap: 48px; }
       #final-cta { padding: 80px 24px; }
@@ -880,10 +1002,10 @@
     <div class="hero-phone-wrap">
       <div class="hero-phone-bg"></div>
       <div class="hero-phone">
-        <img src="Screenshots/discover1.png" alt="HITS Discover screen" loading="lazy" onerror="this.style.display='none'">
+        <img src="Screenshots/Discover_screen.png" alt="HITS Discover screen" loading="lazy" onerror="this.style.display='none'">
       </div>
     </div>
-    <p class="hero-footnote"><span>Free for fans</span> &nbsp;·&nbsp; $5/mo for artists</p>
+    <p class="hero-footnote"><span>Free for fans</span> &nbsp;·&nbsp; $9.99/mo for artists</p>
   </div>
 </section>
 
@@ -947,21 +1069,21 @@
           <span class="setlist-num">01</span>
           <div class="setlist-body">
             <strong>Open &amp; Discover</strong>
-            <p>Open the app and instantly see gigs happening near you — sorted by time, closest first. No account needed to browse.</p>
+            <p>See every gig happening near you — sorted by time, closest first. Filter by Tonight, This Weekend, or Next 7 Days. No account required to browse.</p>
           </div>
         </div>
         <div class="setlist-item">
           <span class="setlist-num">02</span>
           <div class="setlist-body">
-            <strong>Pick Your Vibe</strong>
-            <p>Filter by Tonight, This Weekend, or Next 7 Days. Filter by distance. Filter by genre — Rock, Jazz, Hip-Hop, DJ, and 15 more.</p>
+            <strong>Follow Your Favorites</strong>
+            <p>Follow artists you love. Then flip on the Following filter in the Discover feed to see only their upcoming shows — your personal concert calendar, built as you go.</p>
           </div>
         </div>
         <div class="setlist-item">
           <span class="setlist-num">03</span>
           <div class="setlist-body">
-            <strong>Show Up</strong>
-            <p>Tap a gig for full details, get directions in one tap, add it to your calendar. Then go see some live music.</p>
+            <strong>Book a Private Gig</strong>
+            <p>Need live music for a wedding, party, or private event? Tap any artist's profile and send them a direct inquiry. Connect and negotiate in-app — no middleman.</p>
           </div>
         </div>
       </div>
@@ -976,28 +1098,28 @@
     <div class="how-card reveal d2">
       <div class="how-card-head">
         <h3 class="how-card-name">FOR ARTISTS</h3>
-        <span class="tag hot">$5 / mo</span>
+        <span class="tag hot">$9.99 / mo</span>
       </div>
       <div class="setlist">
         <div class="setlist-item">
           <span class="setlist-num">01</span>
           <div class="setlist-body">
-            <strong>Create Your Profile</strong>
-            <p>Sign up as an artist. Add your display name, bio, genre tags, and a profile photo. Your profile is public — fans can find you.</p>
+            <strong>Build Your Profile</strong>
+            <p>Set your genre tags, bio, and social links. Add availability badges — <em>Private Events</em> or <em>Open to Bookings</em> — so fans know you're reachable. Add your Venmo to accept tips directly.</p>
           </div>
         </div>
         <div class="setlist-item">
           <span class="setlist-num">02</span>
           <div class="setlist-body">
             <strong>Post Your Gig in Seconds</strong>
-            <p>Venue name, address, date, time, genre tags. Tap Post Gig. Your show is live instantly — visible to every fan browsing near that venue.</p>
+            <p>Venue, date, time, genre tags. Hit Post Gig. Your show is live instantly on the Discover feed and map — visible to every fan browsing near that venue.</p>
           </div>
         </div>
         <div class="setlist-item">
           <span class="setlist-num">03</span>
           <div class="setlist-body">
-            <strong>Play to New Fans</strong>
-            <p>Fans who've never heard of you will see your gig on the Discover feed. Every show is a chance to grow your audience.</p>
+            <strong>Grow Your Audience &amp; Get Booked</strong>
+            <p>Track followers, profile views, and gig views in your My Reach dashboard. Receive private gig inquiries directly in-app — weddings, parties, events. Every show is a chance to grow.</p>
           </div>
         </div>
       </div>
@@ -1021,8 +1143,8 @@
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <div class="stat-number">$5</div>
-      <div class="stat-label">Per Month for Artists</div>
+      <div class="stat-number">$9.99</div>
+      <div class="stat-label">Founder / Month</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
@@ -1053,8 +1175,8 @@
         <li><span class="feature-arrow">→</span><span><strong>Sorted by time</strong> — soonest shows at the top, always</span></li>
         <li><span class="feature-arrow">→</span><span><strong>Distance on every card</strong> — know exactly how far the venue is</span></li>
         <li><span class="feature-arrow">→</span><span><strong>Genre tags</strong> for instant filtering by your sound</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>Following filter</strong> — one tap to see only artists you follow</span></li>
         <li><span class="feature-arrow">→</span><span><strong>Posted directly by the artist</strong> — real info, every time</span></li>
-        <li><span class="feature-arrow">→</span><span><strong>Filter by date, distance, or genre</strong> from the top of the feed</span></li>
       </ul>
     </div>
 
@@ -1063,7 +1185,7 @@
         <div class="sp-bg-block tl"></div>
         <div class="sp-bg-block br"></div>
         <div class="sp-phone">
-          <img src="Screenshots/discover1.png" alt="HITS Discover feed" loading="lazy" onerror="this.style.display='none'">
+          <img src="Screenshots/Discover_screen.png" alt="HITS Discover feed" loading="lazy" onerror="this.style.display='none'">
         </div>
       </div>
     </div>
@@ -1105,10 +1227,93 @@
 </section>
 
 
+<!-- ══════════════════════════ ARTIST TOOLS SPOTLIGHT ══ -->
+<section class="spotlight" id="artist-tools">
+  <div class="spotlight-inner">
+
+    <div class="spotlight-copy">
+      <p class="section-eyebrow reveal">Artist Tools</p>
+      <h2 class="spotlight-title reveal d1">YOUR PROFILE.<br>YOUR <span class="red">BRAND.</span></h2>
+      <p class="spotlight-body reveal d2">
+        Your HITS profile is more than a gig list. Signal your availability, collect tips,
+        and track exactly who's watching — all from one dashboard built for working musicians.
+      </p>
+      <ul class="feature-list reveal d3">
+        <li><span class="feature-arrow">→</span><span><strong>Availability badges</strong> — display "Private Events" or "Open to Bookings" so fans know you're reachable</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>Venmo tip button</strong> — fans can tip you directly from your profile, no third-party app required</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>My Reach analytics</strong> — see your total followers, profile views, and gig views at a glance</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>Per-gig view &amp; save counts</strong> — know which shows are getting traction before night-of</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>Inquiries inbox</strong> — all private gig requests in one place, ready to accept or decline</span></li>
+      </ul>
+    </div>
+
+    <div class="spotlight-vis reveal d2">
+      <div class="sp-phone-outer">
+        <div class="sp-bg-block tl"></div>
+        <div class="sp-bg-block br"></div>
+        <div class="sp-phone">
+          <img src="Screenshots/artist_profile.png" alt="HITS Artist Profile" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ PRIVATE GIGS SPOTLIGHT ══ -->
+<section class="spotlight" id="private-gigs">
+  <div class="spotlight-inner flip">
+
+    <div class="spotlight-copy">
+      <p class="section-eyebrow reveal">Private Gigs</p>
+      <h2 class="spotlight-title reveal d1">FANS FIND YOU.<br>YOU GET <span class="red">BOOKED.</span></h2>
+      <p class="spotlight-body reveal d2">
+        Fans planning a wedding, party, or private event can find you on HITS and reach out directly.
+        No agents, no booking fees, no commission — just a real conversation between you and a potential client.
+      </p>
+      <ul class="feature-list reveal d3">
+        <li><span class="feature-arrow">→</span><span><strong>For fans</strong> — tap "Send Inquiry" on any artist profile to pitch your event</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>For artists</strong> — inquiries land in your Inquiries inbox with full event details</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>Accept or decline</strong> — you're always in control of who you respond to</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>In-app messaging</strong> — once accepted, negotiate and confirm everything inside HITS</span></li>
+        <li><span class="feature-arrow">→</span><span><strong>Zero commission</strong> — whatever rate you agree on is yours entirely</span></li>
+      </ul>
+    </div>
+
+    <div class="spotlight-vis reveal d2">
+      <div class="dual-phone-wrap">
+        <div class="sp-phone dual-phone-fan">
+          <img src="Screenshots/artist_page_as_Fan.png" alt="Fan view — Send Inquiry" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="sp-phone dual-phone-artist">
+          <img src="Screenshots/inquire.png" alt="Artist inbox — Receive Inquiry" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- ══════════════════════════════════ PRICING ══ -->
 <section id="pricing">
   <p class="pricing-pre reveal">Artist Pricing</p>
   <h2 class="pricing-h reveal d1">START GETTING<br><span class="y">DISCOVERED.</span></h2>
+
+  <!-- Founder Urgency Bar -->
+  <div class="founder-urgency reveal d2">
+    <div class="founder-urgency-inner">
+      <div class="founder-progress-label">
+        <span class="founder-badge-pill">Founder Pricing</span>
+        <span class="founder-spots-text">12 of 50 spots claimed</span>
+      </div>
+      <div class="founder-bar">
+        <div class="founder-bar-fill" style="width: 24%;"></div>
+      </div>
+      <p class="founder-note">First 50 artists lock in $9.99/mo forever &mdash; after the founder batch fills, the price goes to $19.99/mo. No exceptions.</p>
+    </div>
+  </div>
 
   <div class="ticket-row">
 
@@ -1116,7 +1321,9 @@
     <div class="ticket reveal">
       <div class="ticket-top">
         <p class="ticket-type-label">For Fans</p>
-        <div class="ticket-price">$0</div>
+        <div class="ticket-price-row">
+          <div class="ticket-price">$0</div>
+        </div>
         <p class="ticket-period">Forever Free</p>
         <p class="ticket-desc">Everything you need to find live music near you. No account even required to browse.</p>
       </div>
@@ -1125,9 +1332,10 @@
         <div class="ticket-perk"><span class="perk-check">✓</span>Full access to the Discover feed</div>
         <div class="ticket-perk"><span class="perk-check">✓</span>Live map with real-time gig pins</div>
         <div class="ticket-perk"><span class="perk-check">✓</span>Genre, date &amp; distance filters</div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Follow artists</strong> &amp; filter to their shows</span></div>
         <div class="ticket-perk"><span class="perk-check">✓</span>Save gigs to your profile</div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Send private gig inquiries</strong> for events &amp; parties</span></div>
         <div class="ticket-perk"><span class="perk-check">✓</span>Browse artist profiles &amp; social links</div>
-        <div class="ticket-perk"><span class="perk-check">✓</span>No account needed to browse</div>
       </div>
       <div class="ticket-foot">
         <a href="#" class="ticket-cta">Download Free</a>
@@ -1136,26 +1344,30 @@
 
     <!-- ARTIST TICKET -->
     <div class="ticket ticket-featured reveal d2" style="position:relative;">
-      <div class="ticket-badge">Artist Account</div>
+      <div class="ticket-badge">Founder Rate — First 50 Only</div>
       <div class="ticket-top" style="margin-top:14px;">
         <p class="ticket-type-label">For Artists</p>
-        <div class="ticket-price">$5</div>
-        <p class="ticket-period">Per Month — Cancel Anytime</p>
-        <p class="ticket-desc">One affordable subscription. Post your shows. Reach local fans who are actively looking for something to do tonight.</p>
+        <div class="ticket-price-row">
+          <div class="ticket-price">$9.99</div>
+          <div class="ticket-price-was">$19.99</div>
+        </div>
+        <p class="ticket-period">Per Month — Locked In Forever</p>
+        <p class="ticket-desc">Join now and pay $9.99/mo for life. Miss this batch and the price doubles. Post your first gig in under 2 minutes.</p>
       </div>
       <div class="ticket-tear" style="background:repeating-linear-gradient(90deg,rgba(237,233,223,0.2) 0,rgba(237,233,223,0.2) 5px,transparent 5px,transparent 9px);"></div>
       <div class="ticket-perks">
         <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Unlimited gig postings</strong> — post every show you play</span></div>
         <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Instant visibility</strong> on the Discover feed and map</span></div>
-        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Public artist profile</strong> with bio, genre tags &amp; social links</span></div>
-        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>No commission</strong> — we never touch your ticket money</span></div>
-        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Post a gig in under 2 minutes</strong>, every time</span></div>
-        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Genre tagging</strong> — get found by fans looking for your sound</span></div>
-        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Early adopter rate</strong> — locked in before prices increase</span></div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Availability badges</strong> — Private Events &amp; Open to Bookings</span></div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Venmo tip button</strong> on your public profile</span></div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Private gig inquiries</strong> — fans reach you directly for events</span></div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>My Reach analytics</strong> — followers, profile views &amp; gig views</span></div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>No commission</strong> — we never touch your ticket or booking money</span></div>
+        <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Founder rate locked in</strong> — $9.99/mo for life, price goes up after 50</span></div>
       </div>
       <div class="ticket-foot">
-        <a href="#" class="ticket-cta">Sign Up as an Artist</a>
-        <p class="ticket-note">Fan accounts are always free.</p>
+        <a href="#" class="ticket-cta">Claim Your Founder Spot →</a>
+        <p class="ticket-note">Fan accounts are always free. Cancel artist plan anytime.</p>
       </div>
     </div>
 
@@ -1262,7 +1474,6 @@
 
     <!-- Form -->
     <div id="waitlist-form-wrap" class="reveal d4">
-      <!-- Replace YOUR_FORM_ID with your Formspree form ID after signing up at formspree.io -->
       <form class="waitlist-form" id="waitlist-form" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="2ff4f8d5-09b5-44cf-9598-e95950bb6b6c">
         <input type="hidden" name="subject" value="New HITS Waitlist Signup">
@@ -1281,7 +1492,7 @@
       <p class="waitlist-note">No spam. Just your launch invite when we go live.</p>
     </div>
 
-    <!-- Success state (shown after submit) -->
+    <!-- Success state -->
     <div class="waitlist-success" id="waitlist-success">
       <div class="waitlist-success-icon">&#9835;</div>
       <h3>You're on the list.</h3>
@@ -1298,14 +1509,14 @@
 
   <p class="cta-pre reveal">Get Started</p>
   <h2 class="cta-h reveal d1">YOUR NEXT<br>SHOW IS ON<br><span class="r">HITS.</span></h2>
-  <p class="cta-sub reveal d2">Free for fans. $5/mo for artists. No algorithms, no commissions, no noise.</p>
+  <p class="cta-sub reveal d2">Free for fans. $9.99/mo for artists. No algorithms, no commissions, no noise.</p>
 
   <div class="cta-panels reveal d3">
 
     <div class="cta-panel">
       <p class="cta-panel-label">For Fans</p>
       <h3 class="cta-panel-h">READY TO FIND<br><span class="r">LIVE MUSIC?</span></h3>
-      <p class="cta-panel-p">Free to download. No account needed to browse. Just open it and see what's happening tonight.</p>
+      <p class="cta-panel-p">Free to download. No account needed to browse. Follow your favorites. Book a private gig. Just open it and see what's happening tonight.</p>
       <div class="cta-store-row">
         <a href="#" class="store-btn">
           <span class="store-icon">&#63743;</span>
@@ -1319,10 +1530,10 @@
     </div>
 
     <div class="cta-panel" style="background:rgba(208,52,29,0.06);">
-      <p class="cta-panel-label">For Artists</p>
+      <p class="cta-panel-label">For Artists — Founder Rate</p>
       <h3 class="cta-panel-h">READY TO BE<br><span class="r">DISCOVERED?</span></h3>
-      <p class="cta-panel-p">$5 a month. Post your first gig in under 2 minutes. Reach fans in your neighborhood tonight.</p>
-      <a href="#" class="btn-primary">Sign Up as an Artist</a>
+      <p class="cta-panel-p">$9.99/mo locked in forever — but only for the first 50. Post gigs, get followed, land private bookings. Spots are filling fast.</p>
+      <a href="#" class="btn-primary">Claim Your Founder Spot →</a>
     </div>
 
   </div>
@@ -1400,7 +1611,7 @@
     document.getElementById('role-field').value = btn.dataset.role;
   }
 
-  // Waitlist: AJAX form submission via Formspree
+  // Waitlist: AJAX form submission
   const waitlistForm = document.getElementById('waitlist-form');
   if (waitlistForm) {
     waitlistForm.addEventListener('submit', async (e) => {
@@ -1418,12 +1629,10 @@
         });
 
         if ((await res.json().catch(() => ({}))).success) {
-          // Show success state
           document.getElementById('waitlist-form-wrap').style.display = 'none';
           document.querySelector('.waitlist-role-row').style.display = 'none';
           document.querySelector('.waitlist-count').style.display = 'none';
           document.getElementById('waitlist-success').classList.add('visible');
-          // Bump the counter
           const num = document.getElementById('waitlist-num');
           if (num) num.textContent = parseInt(num.textContent) + 1;
         } else {
