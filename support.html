@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — HITS</title>
+  <meta name="description" content="Get help with the HITS app — FAQs, troubleshooting, and how to contact us.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;700;900&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:      #141210;
+      --surface: #1C1A16;
+      --card:    #252218;
+      --fg:      #EDE9DF;
+      --muted:   #7E7669;
+      --border:  rgba(237, 233, 223, 0.09);
+      --red:     #D0341D;
+      --yellow:  #EFC930;
+      --font-d:  'Big Shoulders Display', sans-serif;
+      --font-b:  'Spectral', serif;
+      --font-m:  'DM Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-b);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.04;
+    }
+
+    /* ── NAV ── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 52px;
+      background: rgba(20, 18, 16, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-d); font-weight: 900;
+      font-size: 1.9rem; letter-spacing: 5px;
+      color: var(--fg); text-decoration: none;
+    }
+    .nav-back {
+      font-family: var(--font-m); font-size: 0.67rem;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--fg); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 140px 52px 72px;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(239,201,48,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-eyebrow {
+      font-family: var(--font-m); font-size: 0.62rem;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: var(--font-d); font-weight: 900;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 0.88; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .page-meta {
+      font-family: var(--font-m); font-size: 0.62rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .page-meta span { color: var(--yellow); }
+
+    /* ── CONTENT ── */
+    .content-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 52px 120px;
+    }
+
+    .policy-section {
+      margin-bottom: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .policy-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .policy-section h2 {
+      font-family: var(--font-d); font-weight: 900;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      text-transform: uppercase; line-height: 0.92;
+      margin-bottom: 20px;
+      color: var(--fg);
+    }
+
+    .policy-section h3 {
+      font-family: var(--font-m); font-size: 0.72rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 10px; margin-top: 28px;
+    }
+
+    .policy-section p {
+      font-size: 0.97rem; font-weight: 300;
+      color: rgba(237,233,223,0.75);
+      line-height: 1.85; margin-bottom: 14px;
+    }
+
+    .policy-section ul {
+      list-style: none; margin-bottom: 14px;
+    }
+    .policy-section ul li {
+      display: flex; gap: 12px;
+      font-size: 0.92rem; font-weight: 300;
+      color: rgba(237,233,223,0.7);
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+      line-height: 1.65;
+    }
+    .policy-section ul li:last-child { border-bottom: none; }
+    .li-dot {
+      font-family: var(--font-m); color: var(--red);
+      font-size: 0.65rem; flex-shrink: 0; margin-top: 3px;
+    }
+
+    .policy-section a {
+      color: var(--yellow); text-decoration: none;
+      border-bottom: 1px solid rgba(239,201,48,0.3);
+      transition: border-color 0.2s;
+    }
+    .policy-section a:hover { border-color: var(--yellow); }
+
+    .highlight-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .highlight-box p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    /* ── FAQ ── */
+    .faq-item {
+      margin-bottom: 28px;
+    }
+    .faq-item:last-child { margin-bottom: 0; }
+    .faq-q {
+      font-family: var(--font-b); font-weight: 600; font-style: italic;
+      font-size: 1.08rem;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+    .faq-a {
+      font-size: 0.92rem; font-weight: 300;
+      color: rgba(237,233,223,0.7);
+      line-height: 1.75;
+    }
+    .faq-a a {
+      color: var(--yellow); text-decoration: none;
+      border-bottom: 1px solid rgba(239,201,48,0.3);
+    }
+    .faq-a a:hover { border-color: var(--yellow); }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px;
+      text-align: center;
+    }
+    .contact-card p {
+      font-size: 0.92rem; font-weight: 300;
+      color: rgba(237,233,223,0.75);
+      margin-bottom: 20px;
+    }
+    .contact-email {
+      display: inline-block;
+      font-family: var(--font-d); font-weight: 900;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: 1px;
+      color: var(--yellow);
+      text-decoration: none;
+      border-bottom: none !important;
+    }
+    .contact-email:hover { color: var(--fg); }
+    .contact-response {
+      font-family: var(--font-m); font-size: 0.6rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); margin-top: 16px; margin-bottom: 0 !important;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px 52px 36px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-wordmark {
+      font-family: var(--font-d); font-weight: 900;
+      font-size: 2rem; letter-spacing: 4px;
+      color: var(--fg);
+    }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a {
+      font-family: var(--font-m); font-size: 0.6rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--fg); }
+    .footer-copy {
+      font-family: var(--font-m); font-size: 0.58rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      #nav { padding: 16px 20px; }
+      .page-header { padding: 120px 20px 52px; }
+      .content-wrap { padding: 52px 20px 80px; }
+      footer { padding: 40px 20px 28px; flex-direction: column; align-items: flex-start; }
+      .contact-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">HITS</a>
+  <a class="nav-back" href="index.html">← Back to Home</a>
+</nav>
+
+
+<header class="page-header">
+  <p class="page-eyebrow">Help</p>
+  <h1 class="page-title">SUPPORT</h1>
+  <p class="page-meta">We usually reply within <span>24 hours</span></p>
+</header>
+
+
+<div class="content-wrap">
+
+  <div class="policy-section">
+    <p>
+      Got a question, ran into a bug, or need help with your account? This page covers the most
+      common questions. If you don't see what you're looking for, email us directly — a real
+      person reads every message.
+    </p>
+  </div>
+
+  <div class="policy-section">
+    <h2>Frequently Asked</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I create an account?</p>
+      <p class="faq-a">Open HITS and tap "Sign Up" from the welcome screen. Choose whether you're a fan
+      (browsing and saving gigs) or an artist (posting gigs). You'll confirm your email before you can sign in.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">I didn't get my confirmation email — what do I do?</p>
+      <p class="faq-a">Check your spam/junk folder first — confirmation emails come from
+      <a href="mailto:noreply@howistheset.com">noreply@howistheset.com</a>. If it's not there, go back to the
+      sign-in screen and use the "Resend confirmation" option. Still nothing after a few minutes?
+      Email us at <a href="mailto:howistheset@gmail.com">howistheset@gmail.com</a> and we'll sort it out.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I post a gig as an artist?</p>
+      <p class="faq-a">From your Profile tab, tap "Post a Gig" and fill in the venue, date, time, and details.
+      Every artist gets 5 free gig posts. After that, an active HITS Pro subscription is required to keep posting.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What does HITS Pro include, and how much does it cost?</p>
+      <p class="faq-a">HITS Pro unlocks unlimited gig posts and lets you read and respond to fan inquiries
+      about your shows. It's $19.99/month (early artists lock in $9.99/month as a founding member).
+      Billing is handled entirely through the Apple App Store.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I cancel or manage my subscription?</p>
+      <p class="faq-a">Subscriptions are billed and managed through Apple, not HITS directly. On your iPhone,
+      go to Settings → [your name] → Subscriptions → HITS, and cancel or manage it there. Access continues
+      until the end of the billing period you already paid for.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Can I use HITS without an account?</p>
+      <p class="faq-a">Yes — tap "Continue as Guest" from the welcome screen to browse the Discover feed and map.
+      Guest browsing doesn't let you save gigs or access a profile, so you'll need an account for that.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">A gig I saved has the wrong venue, date, or time.</p>
+      <p class="faq-a">Artists enter their own gig details, and occasionally something changes after posting.
+      We recommend double-checking with the venue directly before heading out. If you think a listing is
+      fake or spam, email us and we'll take a look.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I delete my account?</p>
+      <p class="faq-a">Go to Profile → Edit Profile and scroll to the bottom for the "Delete Account" option.
+      This permanently removes your account and data. If you run into trouble, email us and we'll delete it
+      for you.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">The app crashed or something's broken.</p>
+      <p class="faq-a">Sorry about that. Please email us at <a href="mailto:howistheset@gmail.com">howistheset@gmail.com</a>
+      with a quick description of what happened (what screen you were on, what you tapped) — that context
+      helps us track it down fast.</p>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h2>Still Need Help?</h2>
+    <div class="contact-card">
+      <p>Email us directly and we'll get back to you.</p>
+      <a class="contact-email" href="mailto:howistheset@gmail.com">howistheset@gmail.com</a>
+      <p class="contact-response">Philadelphia, PA · Replies within 24 hours</p>
+    </div>
+  </div>
+
+</div>
+
+
+<footer>
+  <div class="footer-wordmark">HITS</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 NCad LLC, dba HITS. Philadelphia, PA. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
