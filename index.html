@@ -371,7 +371,9 @@
     .how-phone img { width: 100%; height: 100%; object-fit: cover; }
 
     /* Workflow demo video, framed like the other phone mockups */
-    .how-phone-video { cursor: default; }
+    /* Screen recording is a true 9:16 capture, not the 9:19.5 device screenshots —
+       match the frame to the recording's real aspect ratio so nothing gets cropped */
+    .how-phone-video { cursor: default; aspect-ratio: 9 / 16; }
     .how-phone-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .how-video-caption {
       display: inline-flex; align-items: center; gap: 8px;
