@@ -15,6 +15,7 @@
     html { scroll-behavior: smooth; }
 
     :root {
+      --banner-h: 72px;
       --bg:      #141210;
       --surface: #1C1A16;
       --card:    #252218;
@@ -58,9 +59,33 @@
     .d4 { transition-delay: 0.32s; }
     .d5 { transition-delay: 0.40s; }
 
+    /* ── BETA BANNER ── */
+    .beta-banner {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 600;
+      background: var(--yellow);
+      color: #141210;
+      text-align: center;
+      padding: 13px 20px;
+      border-bottom: 1.5px solid rgba(20,18,16,0.18);
+      font-family: var(--font-m);
+      font-size: 0.82rem;
+      letter-spacing: 0.4px;
+      line-height: 1.5;
+    }
+    .beta-banner strong {
+      text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .beta-banner a {
+      color: #141210; text-decoration: underline;
+      font-weight: 600;
+    }
+    .beta-banner a:hover { color: var(--red); }
+    .beta-banner .sep { margin: 0 8px; opacity: 0.5; }
+
     /* ── NAV ── */
     #nav {
-      position: fixed; top: 0; left: 0; right: 0;
+      position: fixed; top: var(--banner-h); left: 0; right: 0;
       z-index: 500;
       display: flex; align-items: center; justify-content: space-between;
       padding: 22px 52px;
@@ -100,7 +125,7 @@
       min-height: 100vh;
       display: grid; grid-template-columns: 1fr 380px;
       gap: 48px; align-items: center;
-      padding: 132px 52px 80px;
+      padding: calc(132px + var(--banner-h)) 52px 80px;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
@@ -111,7 +136,7 @@
       pointer-events: none;
     }
     .hero-stamp {
-      position: absolute; top: 148px; right: 52px;
+      position: absolute; top: calc(148px + var(--banner-h)); right: 52px;
       font-family: var(--font-m); font-size: 0.6rem;
       letter-spacing: 2px; color: var(--muted);
       text-transform: uppercase; writing-mode: vertical-rl; opacity: 0.45;
@@ -318,7 +343,7 @@
       line-height: 1.65; font-style: italic;
     }
     .how-phone-wrap {
-      display: flex; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       margin-top: 40px; padding-top: 28px;
       border-top: 1px solid var(--border);
     }
@@ -344,6 +369,19 @@
       z-index: 2; pointer-events: none;
     }
     .how-phone img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Workflow demo video, framed like the other phone mockups */
+    /* Screen recording is a true 9:16 capture, not the 9:19.5 device screenshots —
+       match the frame to the recording's real aspect ratio so nothing gets cropped */
+    .how-phone-video { cursor: default; aspect-ratio: 9 / 16; }
+    .how-phone-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .how-video-caption {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-m); font-weight: 500;
+      font-size: 0.64rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #141210; background: var(--yellow);
+      padding: 9px 18px; margin-bottom: 20px;
+    }
 
     /* ── YELLOW STATS STRIP ── */
     .stats-strip {
@@ -900,13 +938,19 @@
       position: relative;
       z-index: 200;
     }
+    /* Workflow video isn't a zoomable screenshot — keep it at rest so native controls stay usable */
+    .how-phone-video:hover {
+      transform: none !important;
+      box-shadow: 0 0 0 1px #909090, 0 4px 24px rgba(0,0,0,0.6) !important;
+    }
+    .how-card:has(.how-phone-video:hover) { z-index: auto; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       #nav { padding: 18px 24px; }
       #nav.scrolled { padding: 12px 24px; }
       .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; padding: 120px 24px 64px; text-align: center; }
+      #hero { grid-template-columns: 1fr; padding: calc(120px + var(--banner-h)) 24px 64px; text-align: center; }
       .hero-stamp { display: none; }
       .hero-right { display: none; }
       .hero-eyebrow { justify-content: center; }
@@ -941,6 +985,16 @@
 </head>
 <body>
 
+<!-- ══════════════════════════════════════ BETA BANNER ══ -->
+<div class="beta-banner" id="beta-banner">
+  <a href="#waitlist">Join the waitlist</a>
+  <span class="sep">·</span>
+  <strong>Private Beta</strong> — HITS isn't live yet.
+  <br>
+  If you are an artist who wants to post shows before launch and have a free account forever, email
+  <a href="mailto:howistheset@gmail.com">howistheset@gmail.com</a>
+</div>
+
 <!-- ══════════════════════════════════════ NAV ══ -->
 <nav id="nav">
   <a class="nav-logo" href="#">HITS</a>
@@ -961,7 +1015,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow reveal">
       <span class="live-dot"></span>
-      Now Live in Philadelphia
+      Launching Soon in Philadelphia
     </div>
 
     <h1 class="hero-h1 reveal d1">
@@ -976,22 +1030,22 @@
     </p>
 
     <div class="hero-actions reveal d3">
-      <a href="#" class="btn-primary">▶&ensp;Download the App</a>
+      <a href="#waitlist" class="btn-primary">Join the Waitlist →</a>
       <a href="#how-it-works" class="btn-ghost">How It Works</a>
     </div>
 
     <div class="store-row reveal d4">
-      <a href="#" class="store-btn">
+      <a href="#waitlist" class="store-btn">
         <span class="store-icon">&#63743;</span>
         <div class="store-text">
-          <span>Download on the</span>
+          <span>Coming soon to</span>
           <strong>App Store</strong>
         </div>
       </a>
-      <a href="#" class="store-btn">
+      <a href="#waitlist" class="store-btn">
         <span class="store-icon">&#9654;</span>
         <div class="store-text">
-          <span>Get it on</span>
+          <span>Coming soon on</span>
           <strong>Google Play</strong>
         </div>
       </a>
@@ -1124,8 +1178,11 @@
         </div>
       </div>
       <div class="how-phone-wrap">
-        <div class="how-phone">
-          <img src="Screenshots/post_gig.PNG" alt="HITS Post a Gig" loading="lazy" onerror="this.style.display='none'">
+        <p class="how-video-caption">▶&ensp;Click the phone to watch: posting a gig, start to finish</p>
+        <div class="how-phone how-phone-video">
+          <video controls playsinline preload="metadata" poster="Screenshots/post_gig.PNG">
+            <source src="Screenshots/Artist_post_flow.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
@@ -1338,7 +1395,7 @@
         <div class="ticket-perk"><span class="perk-check">✓</span>Browse artist profiles &amp; social links</div>
       </div>
       <div class="ticket-foot">
-        <a href="#" class="ticket-cta">Download Free</a>
+        <a href="#waitlist" class="ticket-cta">Join the Waitlist</a>
       </div>
     </div>
 
@@ -1366,8 +1423,9 @@
         <div class="ticket-perk"><span class="perk-check">✓</span><span><strong>Founder rate locked in</strong> — $9.99/mo for life, price goes up after 50</span></div>
       </div>
       <div class="ticket-foot">
-        <a href="#" class="ticket-cta">Claim Your Founder Spot →</a>
+        <a href="#waitlist" class="ticket-cta">Claim Your Founder Spot →</a>
         <p class="ticket-note">Fan accounts are always free. Cancel artist plan anytime.</p>
+        <p class="ticket-note" style="text-transform:none;">Want to post shows before launch? Email <a href="mailto:howistheset@gmail.com" style="color:var(--fg); text-decoration:underline;">howistheset@gmail.com</a> for early beta access.</p>
       </div>
     </div>
 
@@ -1518,13 +1576,13 @@
       <h3 class="cta-panel-h">READY TO FIND<br><span class="r">LIVE MUSIC?</span></h3>
       <p class="cta-panel-p">Free to download. No account needed to browse. Follow your favorites. Book a private gig. Just open it and see what's happening tonight.</p>
       <div class="cta-store-row">
-        <a href="#" class="store-btn">
+        <a href="#waitlist" class="store-btn">
           <span class="store-icon">&#63743;</span>
-          <div class="store-text"><span>Download on the</span><strong>App Store</strong></div>
+          <div class="store-text"><span>Coming soon to</span><strong>App Store</strong></div>
         </a>
-        <a href="#" class="store-btn">
+        <a href="#waitlist" class="store-btn">
           <span class="store-icon">&#9654;</span>
-          <div class="store-text"><span>Get it on</span><strong>Google Play</strong></div>
+          <div class="store-text"><span>Coming soon on</span><strong>Google Play</strong></div>
         </a>
       </div>
     </div>
@@ -1533,7 +1591,7 @@
       <p class="cta-panel-label">For Artists — Founder Rate</p>
       <h3 class="cta-panel-h">READY TO BE<br><span class="r">DISCOVERED?</span></h3>
       <p class="cta-panel-p">$9.99/mo locked in forever — but only for the first 50. Post gigs, get followed, land private bookings. Spots are filling fast.</p>
-      <a href="#" class="btn-primary">Claim Your Founder Spot →</a>
+      <a href="#waitlist" class="btn-primary">Claim Your Founder Spot →</a>
     </div>
 
   </div>
@@ -1568,6 +1626,7 @@
       <h5>Contact</h5>
       <ul>
         <li><a href="support.html">Contact Us</a></li>
+        <li><a href="mailto:howistheset@gmail.com">howistheset@gmail.com</a></li>
         <li><a href="#">Instagram</a></li>
         <li><a href="#">TikTok</a></li>
       </ul>
@@ -1591,6 +1650,16 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 48);
   }, { passive: true });
+
+  // Beta banner: measure its real (possibly wrapped) height so nav/hero offsets stay correct
+  const betaBanner = document.getElementById('beta-banner');
+  if (betaBanner) {
+    const setBannerHeight = () => {
+      document.documentElement.style.setProperty('--banner-h', betaBanner.offsetHeight + 'px');
+    };
+    setBannerHeight();
+    window.addEventListener('resize', setBannerHeight);
+  }
 
   const ro = new IntersectionObserver(entries => {
     entries.forEach(e => {
