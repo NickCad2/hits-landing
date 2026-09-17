@@ -343,7 +343,7 @@
       line-height: 1.65; font-style: italic;
     }
     .how-phone-wrap {
-      display: flex; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       margin-top: 40px; padding-top: 28px;
       border-top: 1px solid var(--border);
     }
@@ -369,6 +369,17 @@
       z-index: 2; pointer-events: none;
     }
     .how-phone img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Workflow demo video, framed like the other phone mockups */
+    .how-phone-video { cursor: default; }
+    .how-phone-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .how-video-caption {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-m); font-weight: 500;
+      font-size: 0.64rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #141210; background: var(--yellow);
+      padding: 9px 18px; margin-bottom: 20px;
+    }
 
     /* ── YELLOW STATS STRIP ── */
     .stats-strip {
@@ -925,6 +936,12 @@
       position: relative;
       z-index: 200;
     }
+    /* Workflow video isn't a zoomable screenshot — keep it at rest so native controls stay usable */
+    .how-phone-video:hover {
+      transform: none !important;
+      box-shadow: 0 0 0 1px #909090, 0 4px 24px rgba(0,0,0,0.6) !important;
+    }
+    .how-card:has(.how-phone-video:hover) { z-index: auto; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
@@ -968,10 +985,11 @@
 
 <!-- ══════════════════════════════════════ BETA BANNER ══ -->
 <div class="beta-banner" id="beta-banner">
-  <strong>Private Beta</strong> — HITS isn't live yet.
   <a href="#waitlist">Join the waitlist</a>
   <span class="sep">·</span>
-  Artists who want to post shows before launch, email
+  <strong>Private Beta</strong> — HITS isn't live yet.
+  <span class="sep">·</span>
+  If you are an artist who wants to post shows before launch and have a free account forever, email
   <a href="mailto:howistheset@gmail.com">howistheset@gmail.com</a>
 </div>
 
@@ -1158,8 +1176,11 @@
         </div>
       </div>
       <div class="how-phone-wrap">
-        <div class="how-phone">
-          <img src="Screenshots/post_gig.PNG" alt="HITS Post a Gig" loading="lazy" onerror="this.style.display='none'">
+        <p class="how-video-caption">▶&ensp;Click the phone to watch: posting a gig, start to finish</p>
+        <div class="how-phone how-phone-video">
+          <video controls playsinline preload="metadata" poster="Screenshots/post_gig.PNG">
+            <source src="Screenshots/Artist_post_flow.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
